@@ -15,6 +15,7 @@ def index(request):
     html += '<code><a href="{}deleterecord/">http://{}/deleterecord/[DomainName]/[RecordName]/[RecordType]/</a></code></p>'.format(request.path, request.get_host())
     html += '<p><h2>Refresh DNS :</h2>'
     html += '<code><a href="{}refresh/">http://{}/refresh/[DomainName]/</a></code></p>'.format(request.path, request.get_host())
+    html += '<br><br><br><small>Copyright <a href="http://hajiani.org">Javad Hajiani</a></small>'
     html += '<br></center>'
     return HttpResponse(html)
 
