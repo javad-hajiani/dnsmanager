@@ -11,8 +11,9 @@ def index(request):
     html += '<code><a href="{}adddomain/example.com/1.1.1.1/192.168.1.1/">http://{}/adddomain/[DomainName]/[PublicAddress]/[LocalAddress]/</a></code></p>'.format(
         request.path, request.get_host())
     html += '<p><h2>Show Records :</h2>'
-    html += '<code><a href="{}showrecords/example.com/">http://{}/showrecords/[DomainName]/</a></code></p>'.format(request.path,
-                                                                                                       request.get_host())
+    html += '<code><a href="{}showrecords/example.com/">http://{}/showrecords/[DomainName]/</a></code></p>'.format(
+        request.path,
+        request.get_host())
     html += '<p><h2>Add Records :</h2>'
     html += '<code><a href="{}addrecord/example.com/local/A/www/1.1.1.1">http://{}/addrecord/[DomainName]/[local|internet]/[RecordType]/[Key]/[Value]/</a></code></p>'.format(
         request.path, request.get_host())
@@ -28,29 +29,30 @@ def index(request):
 
 
 def showdomains(request):
-    response={"status":"Ok"}
+    response = {"status": "Ok"}
     return JsonResponse(response)
 
 
 def adddomains(request, domain, publicip, privateip):
-    response = {"status": "Ok","variables":domain+' '+publicip+' '+privateip}
+    response = {"status": "Ok", "variables": domain + ' ' + publicip + ' ' + privateip}
     return JsonResponse(response)
 
 
 def showrecords(request, domain):
-    response = {"status": "Ok","variables":domain}
+    response = {"status": "Ok", "variables": domain}
     return JsonResponse(response)
 
 
-def addrecord(request, domain,zonetype, recordtype, key, value):
-    response = {"status": "Ok","variables":domain+' '+recordtype+' '+key+' '+value}
+def addrecord(request, domain, zonetype, recordtype, key, value):
+    response = {"status": "Ok", "variables": domain + ' ' + recordtype + ' ' + key + ' ' + value}
     return JsonResponse(response)
+
 
 def deleterecord(request, domain, recordname, recordtype):
-    response = {"status": "Ok","variables":domain+' '+recordname+' '+recordtype}
+    response = {"status": "Ok", "variables": domain + ' ' + recordname + ' ' + recordtype}
     return JsonResponse(response)
 
 
 def refresh(request, domain):
-    response={"status":"Ok"}
+    response = {"status": "Ok"}
     return JsonResponse(response)
