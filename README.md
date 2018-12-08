@@ -9,7 +9,7 @@ You Can Call each kind of actions in bash scripts or applications and parse Json
 - bear this in mind that ,it works if your dns structure like [Bind9 Split Horizon](http://github.com/javad-hajiani/splithorizon.git)
 ### Requirements
 
-- ######Python3
+- #####Python3
  - Debian Based
   - > sudo apt install python3
  - Redhat Based
@@ -18,9 +18,9 @@ You Can Call each kind of actions in bash scripts or applications and parse Json
   - > sudo pacman -Sy python3
 #
 
-- ######virtualenv
+- #####virtualenv
  - > pip install virtualenv
-- ###### Django 2
+- ##### Django 2
  - > pip install django==2
 
 ### Installation
