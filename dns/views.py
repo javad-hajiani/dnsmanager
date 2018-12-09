@@ -52,12 +52,12 @@ def showrecords(request, domain):
             matched = re.search(regex, line)
             if matched:
                 expr = re.search(regex2, matched[0])
-                expr[0].replace('"','')
+                expr[0]=expr[0].replace('"','')
             else:
                 expr[0] = "Record File not found in zone line"
 
-          #  response= {"Status": "Ok","RecordFile": expr[0]}
-    return HttpResponse(expr[0])
+    response= {"Status": "Ok","RecordFile": expr[0]}
+    return HttpResponse(response)
 
 
 def addrecord(request, domain, zonetype, recordtype, key, value):
