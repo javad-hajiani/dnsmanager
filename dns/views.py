@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from . import vars
-
+import json
 def index(request):
     html: str = '<center><h1>Dns Manager</h1><br>'
     html += '<h3> You can use below instruction to work with your bind9</h3><br>'
@@ -33,7 +33,8 @@ def showdomains(request):
     for line in open(vars.externalzones,'r'):
         if 'zone' in line:
             response.append('"zonename": "line.split(\'"\')[1]"')
-    return JsonResponse(response)
+            response_parsed=json.loads(response)
+    return JsonResponse(response_parsed)
 
 
 def adddomains(request, domain, publicip, privateip):
