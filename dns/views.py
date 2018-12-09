@@ -57,7 +57,7 @@ def showrecords(request, domain):
                 expr[0] = "Record File not found in zone line"
 
             response= {"Status": "Ok","RecordFile": expr[0]}
-    return JsonResponse(response)
+    return HttpResponse(response)
 
 
 def addrecord(request, domain, zonetype, recordtype, key, value):
