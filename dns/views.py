@@ -63,7 +63,8 @@ def showrecords(request, domain):
             else:
                 zonefile = "Record File not found in zone line"
     if not path.isfile(zonefile):
-        return JsonResponse('{"Status":"ZoneFile Not Found"}')
+        response={"Status":"ZoneFile Not Found"}
+        return JsonResponse(response)
     with open(zonefile, 'r') as filereader:
         zone = filereader.readlines()
     for records in zone:
