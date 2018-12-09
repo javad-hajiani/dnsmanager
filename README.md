@@ -1,4 +1,4 @@
-# DNS Manager with Django RestApi
+# DNS Manager with Django RESTful API
 
 ## Getting Started
 
@@ -9,7 +9,7 @@ You Can Call each kind of actions in bash scripts or applications and parse Json
 - bear this in mind that ,it works if your dns structure like [Bind9 Split Horizon](https://github.com/javad-hajiani/Ansible-Bind-DNS-Cluster)
 ### Requirements
 
-- #####Python3
+- ##### Python3
  - Debian Based
   - > sudo apt install python3
  - Redhat Based
@@ -18,7 +18,7 @@ You Can Call each kind of actions in bash scripts or applications and parse Json
   - > sudo pacman -Sy python3
 #
 
-- #####virtualenv
+- ##### virtualenv
  - > pip install virtualenv
 - ##### Django 2
  - > pip install django==2
@@ -31,7 +31,7 @@ You Can Call each kind of actions in bash scripts or applications and parse Json
 - > python manage.py runserver 
 ### How it works
 
-####it can help!!!
+#### it can help!!!
 
 
 ![root page for api](https://i.ibb.co/5cxV65J/Screen-Shot-2018-12-08-at-3-46-33-PM.png)
