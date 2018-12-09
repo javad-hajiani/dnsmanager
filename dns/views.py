@@ -2,6 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from . import vars
 import json
+import re
 def index(request):
     html: str = '<center><h1>Dns Manager</h1><br>'
     html += '<h3> You can use below instruction to work with your bind9</h3><br>'
@@ -43,10 +44,18 @@ def adddomains(request, domain, publicip, privateip):
 
 
 def showrecords(request, domain):
+    regex = r"file \"[\/a-zA-Z-_0-9.]*"
+    regex2 = r"\"[\/a-zA-Z-_0-9.]*"
     response = {"Status" : "Domain Not Found"}
     for line in open(vars.externalzones,'r'):
         if domain in line:
-            response= {"Status": "Ok","DomainName": line}
+            matched = re.search(regex, line)
+            if matched:
+                expr = re.search(regex2, matched[0])
+            else:
+                expr[0] = "Record File not found in zone line"
+
+            response= {"Status": "Ok","DomainName": expr[0]}
     return JsonResponse(response)
 
 
