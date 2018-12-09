@@ -6,7 +6,7 @@ This script help us for work easily with bind dns in your scripts.Its my experie
 
 You Can Call each kind of actions in bash scripts or applications and parse Json Output in your application.
 
-- bear this in mind that ,it works if your dns structure like [Bind9 Split Horizon](https://github.com/javad-hajiani/Ansible-Bind-DNS-Cluster)
+- bear this in mind that, it works if your dns structure like [Bind9 Split Horizon](https://github.com/javad-hajiani/Ansible-Bind-DNS-Cluster)
 ### Requirements
 
 - ##### Python3
