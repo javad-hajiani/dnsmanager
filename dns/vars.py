@@ -1,2 +1,2 @@
-externalzones = "/etc/bind/externalzones"
-internalzones = "/etc/bind/internalzones"
+externalzones = "/etc/bind/external-zones"
+internalzones = "/etc/bind/internal-zones"
