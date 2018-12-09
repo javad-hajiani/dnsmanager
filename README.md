@@ -24,6 +24,8 @@ You Can Call each kind of actions in bash scripts or applications and parse Json
  - > pip install django==2
 
 ### Installation
+#### Step by Step
+
 - >  sudo apt install python3
 - > pip install virtualenv
 - > pip install -r requirements.txt
