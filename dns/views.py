@@ -46,7 +46,7 @@ def showrecords(request, domain):
     response = {"Status" : "Domain Not Found"}
     for line in open(vars.externalzones,'r'):
         if domain in line:
-            response= {"Status": "Ok","DomainName": line.split('"')[1]}
+            response= {"Status": "Ok","DomainName": line}
     return JsonResponse(response)
 
 
