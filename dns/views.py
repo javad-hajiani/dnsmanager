@@ -49,7 +49,7 @@ def showrecords(request, domain):
     regex2 = r"\"[\/a-zA-Z-_0-9.]*"
     zonefile = ""
     response = []
-    response = {"Status": "Domain Not Found"}
+    response = []
     for line in open(vars.externalzones, 'r'):
         if domain in line:
             matched = re.search(regex, line)
@@ -70,6 +70,8 @@ def showrecords(request, domain):
         else:
             continue
         response.append(data)
+    if len(response)==0:
+        response.append('{"Status": "No Record Found!!!"}')
     return JsonResponse(response, safe=False)
 
 
