@@ -34,8 +34,7 @@ def showdomains(request):
         if 'zone' in line:
             data = {"name" : line.split('"')[1]}
             response.append(data)
-    response_dumped=json.dumps(response)
-    return JsonResponse(response_dumped,safe=False)
+    return JsonResponse(response,safe=False)
 
 
 def adddomains(request, domain, publicip, privateip):
