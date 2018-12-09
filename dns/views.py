@@ -3,6 +3,7 @@ from django.shortcuts import render
 from . import vars
 import json
 import re
+from os import path
 
 
 def index(request):
@@ -50,6 +51,9 @@ def showrecords(request, domain):
     zonefile = ""
     response = []
     response = []
+    if not path.isfile(vars.externalzones):
+        return JsonResponse('{"Status":"ZoneConfig Not Found"}')
+        exit(1)
     for line in open(vars.externalzones, 'r'):
         if domain in line:
             matched = re.search(regex, line)
@@ -58,13 +62,15 @@ def showrecords(request, domain):
                 zonefile = secondsearch[0].replace('"', '')
             else:
                 zonefile = "Record File not found in zone line"
+    if not path.isfile(zonefile):
+        return JsonResponse('"Status":"ZoneFile For {} Not Found"'.format(domain))
     with open(zonefile, 'r') as filereader:
         zone = filereader.readlines()
     for records in zone:
         record = re.split(r'(\t|\s+)', records.strip())
         q = [i for i in record if i.strip()]
         if len(q)== 4:
-            data = {"recordname": q[0], "TTL": q[1], "RecordType": q[2], "RecordValue": q[3]}
+            data = {"recordname": q[0], "RecordClass": q[1], "RecordType": q[2], "RecordValue": q[3]}
         elif len(q) == 3:
             data = {"recordname": q[0], "RecordType": q[1], "RecordValue": q[2]}
         else:
