@@ -63,7 +63,12 @@ def showrecords(request, domain):
     for records in zone:
         record = re.split(r'(\t|\s+)', records.strip())
         q = [i for i in record if i.strip()]
-        data = {"recordname": q[0], "TTL": q[1], "RecordType": q[2], "RecordValue": q[3]}
+        if len(q)== 4:
+            data = {"recordname": q[0], "TTL": q[1], "RecordType": q[2], "RecordValue": q[3]}
+        elif len(q) == 3:
+            data = {"recordname": q[0], "RecordType": q[1], "RecordValue": q[2]}
+        else:
+            continue
         response.append(data)
     return JsonResponse(response, safe=False)
 
