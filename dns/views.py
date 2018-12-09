@@ -1,6 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-
+from . import vars
 
 def index(request):
     html: str = '<center><h1>Dns Manager</h1><br>'
@@ -29,6 +29,9 @@ def index(request):
 
 
 def showdomains(request):
+    for line in open(vars.externalzones,'r'):
+        if 'zone' in line:
+            print(line.split(' ')[1])
     response = {"status": "Ok"}
     return JsonResponse(response)
 
