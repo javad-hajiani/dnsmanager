@@ -29,11 +29,11 @@ def index(request):
 
 
 def showdomains(request):
-    response=""
+    response=[{}]
     for line in open(vars.externalzones,'r'):
         if 'zone' in line:
-            response += '  '+ line.split('"')[1]
-    return HttpResponse(response)
+            response.append('"zonename": "line.split(\'"\')[1]"')
+    return JsonResponse(response)
 
 
 def adddomains(request, domain, publicip, privateip):
