@@ -32,10 +32,11 @@ def showdomains(request):
     response=[{}]
     for line in open(vars.externalzones,'r'):
         if 'zone' in line:
-            response.append('"zonename": "line.split(\'"\')[1]"')
-            response_parsed=json.loads(response)
-            response_dumped=json.dumps(response_parsed)
-    return JsonResponse(response_dumped)
+            data = {"zonename":line.split('"')[1]}
+            response.append(data)
+            #response_parsed=json.loads(response)
+            #response_dumped=json.dumps(response_parsed)
+    return HttpResponse(response)
 
 
 def adddomains(request, domain, publicip, privateip):
