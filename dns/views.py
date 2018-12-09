@@ -51,12 +51,12 @@ def showrecords(request, domain):
         if domain in line:
             matched = re.search(regex, line)
             if matched:
-                expr = re.search(regex2, matched[0])
-                expr[0]=expr[0].replace('"','')
+                secondsearch = re.search(regex2, matched[0])
+                expr=secondsearch[0].replace('"','')
             else:
-                expr[0] = "Record File not found in zone line"
+                expr = "Record File not found in zone line"
 
-    response= {"Status": "Ok","RecordFile": expr[0]}
+    response= {"Status": "Ok","RecordFile": expr}
     return HttpResponse(response)
 
 
