@@ -63,21 +63,21 @@ def showrecords(request, domain):
             else:
                 zonefile = "Record File not found in zone line"
     if not path.isfile(zonefile):
-        response= "{'status' : {}}".format("ZoneFile For {} Not Found!!".format(domain))
-        return JsonResponse(response,safe=False)
+        response = "{\"status\"  : \"ZoneFile For " + domain + " Not Found \""
+        return JsonResponse(response, safe=False)
     with open(zonefile, 'r') as filereader:
         zone = filereader.readlines()
     for records in zone:
         record = re.split(r'(\t|\s+)', records.strip())
         q = [i for i in record if i.strip()]
-        if len(q)== 4:
+        if len(q) == 4:
             data = {"recordname": q[0], "RecordClass": q[1], "RecordType": q[2], "RecordValue": q[3]}
         elif len(q) == 3:
             data = {"recordname": q[0], "RecordType": q[1], "RecordValue": q[2]}
         else:
             continue
         response.append(data)
-    if len(response)==0:
+    if len(response) == 0:
         response.append('{"Status": "No Record Found!!!"}')
     return JsonResponse(response, safe=False)
 
