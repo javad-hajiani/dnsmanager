@@ -3,6 +3,8 @@ from django.shortcuts import render
 from . import vars
 import json
 import re
+
+
 def index(request):
     html: str = '<center><h1>Dns Manager</h1><br>'
     html += '<h3> You can use below instruction to work with your bind9</h3><br>'
@@ -13,8 +15,7 @@ def index(request):
         request.path, request.get_host())
     html += '<p><h2>Show Records :</h2>'
     html += '<code><a href="{}showrecords/example.com/">http://{}/showrecords/[DomainName]/</a></code></p>'.format(
-        request.path,
-        request.get_host())
+        request.path, request.get_host())
     html += '<p><h2>Add Records :</h2>'
     html += '<code><a href="{}addrecord/example.com/local/A/www/1.1.1.1">http://{}/addrecord/[DomainName]/[local|internet]/[RecordType]/[Key]/[Value]/</a></code></p>'.format(
         request.path, request.get_host())
@@ -30,12 +31,12 @@ def index(request):
 
 
 def showdomains(request):
-    response=[]
-    for line in open(vars.externalzones,'r'):
+    response = []
+    for line in open(vars.externalzones, 'r'):
         if 'zone' in line:
-            data = {"name" : line.split('"')[1]}
+            data = {"name": line.split('"')[1]}
             response.append(data)
-    return JsonResponse(response,safe=False)
+    return JsonResponse(response, safe=False)
 
 
 def adddomains(request, domain, publicip, privateip):
@@ -46,19 +47,25 @@ def adddomains(request, domain, publicip, privateip):
 def showrecords(request, domain):
     regex = r"file \"[\/a-zA-Z-_0-9.]*"
     regex2 = r"\"[\/a-zA-Z-_0-9.]*"
-    zonefile=""
-    response = {"Status" : "Domain Not Found"}
-    for line in open(vars.externalzones,'r'):
+    zonefile = ""
+    response = []
+    response = {"Status": "Domain Not Found"}
+    for line in open(vars.externalzones, 'r'):
         if domain in line:
             matched = re.search(regex, line)
             if matched:
                 secondsearch = re.search(regex2, matched[0])
-                zonefile=secondsearch[0].replace('"','')
+                zonefile = secondsearch[0].replace('"', '')
             else:
                 zonefile = "Record File not found in zone line"
-
-    response= {"Status": "Ok","RecordFile": zonefile}
-    return JsonResponse(response)
+    with open(zonefile, 'r') as filereader:
+        zone = filereader.readlines()
+    for records in zone:
+        record = re.split(r'(\t|\s+)', records.strip())
+        q = [i for i in record if i.strip()]
+        data = {"recordname": q[0], "TTL": q[1], "RecordType": q[2], "RecordValue": q[3]}
+        response.append(data)
+    return JsonResponse(response, safe=False)
 
 
 def addrecord(request, domain, zonetype, recordtype, key, value):
