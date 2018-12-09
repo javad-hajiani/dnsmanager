@@ -52,7 +52,7 @@ def showrecords(request, domain):
             matched = re.search(regex, line)
             if matched:
                 expr = re.search(regex2, matched[0])
-                expr[0].replace('\"','')
+                expr[0].replace('"','')
             else:
                 expr[0] = "Record File not found in zone line"
 
