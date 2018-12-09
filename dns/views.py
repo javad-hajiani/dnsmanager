@@ -43,10 +43,10 @@ def adddomains(request, domain, publicip, privateip):
 
 
 def showrecords(request, domain):
+    response = {"Status" : "Domain Not Found"}
     for line in open(vars.externalzones,'r'):
         if domain in line:
-            domainname= {"DomainName": line.split('"')[1]}
-    response = domainname
+            response= {"Status": "Ok","DomainName": line.split('"')[1]}
     return JsonResponse(response)
 
 
