@@ -32,7 +32,7 @@ def showdomains(request):
     response=""
     for line in open(vars.externalzones,'r'):
         if 'zone' in line:
-            response += '  '+ line.split(' ')[1]
+            response += '  '+ line.split('"')[1]
     return HttpResponse(response)
 
 
