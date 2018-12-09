@@ -46,17 +46,18 @@ def adddomains(request, domain, publicip, privateip):
 def showrecords(request, domain):
     regex = r"file \"[\/a-zA-Z-_0-9.]*"
     regex2 = r"\"[\/a-zA-Z-_0-9.]*"
+    zonefile=""
     response = {"Status" : "Domain Not Found"}
     for line in open(vars.externalzones,'r'):
         if domain in line:
             matched = re.search(regex, line)
             if matched:
                 secondsearch = re.search(regex2, matched[0])
-                expr=secondsearch[0].replace('"','')
+                zonefile=secondsearch[0].replace('"','')
             else:
-                expr = "Record File not found in zone line"
+                zonefile = "Record File not found in zone line"
 
-    response= {"Status": "Ok","RecordFile": expr}
+    response= {"Status": "Ok","RecordFile": zonefile}
     return JsonResponse(response)
 
 
