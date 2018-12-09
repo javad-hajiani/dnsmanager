@@ -31,9 +31,8 @@ def index(request):
 def showdomains(request):
     for line in open(vars.externalzones,'r'):
         if 'zone' in line:
-            print(line.split(' ')[1])
-    response = {"status": "Ok"}
-    return JsonResponse(response)
+            response += '  '+ line.split(' ')[1]
+    return HttpResponse(response)
 
 
 def adddomains(request, domain, publicip, privateip):
