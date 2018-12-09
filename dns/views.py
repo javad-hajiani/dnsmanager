@@ -32,7 +32,7 @@ def showdomains(request):
     response=[]
     for line in open(vars.externalzones,'r'):
         if 'zone' in line:
-            data = {"zonename":line.split('"')[1]}
+            data = line.split('"')[1]
             response.append(data)
             #response_parsed=json.loads(response)
             #response_dumped=json.dumps(response_parsed)
