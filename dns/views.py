@@ -29,7 +29,7 @@ def index(request):
 
 
 def showdomains(request):
-    response=[{}]
+    response=[]
     for line in open(vars.externalzones,'r'):
         if 'zone' in line:
             data = {"zonename":line.split('"')[1]}
