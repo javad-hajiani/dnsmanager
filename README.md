@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/javad-hajiani/Exchanger.svg?branch=master)](https://travis-ci.org/javad-hajiani/dnsmanager)
+
 # DNS Manager with Django RESTful API
 
 ## Getting Started
